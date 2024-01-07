@@ -1,0 +1,26 @@
+schemaVersion: 2.0.0
+metadata:
+  name: shelly-dev
+  version: 1.0.0
+  displayName: Shelly Dev
+  description: Development envrionment for the Shelly AI tool
+components:
+  - name: aws-runtime
+    container:
+      image: public.ecr.aws/aws-mde/universal-image:latest
+      mountSources: true
+      volumeMounts:
+        - name: docker-store
+          path: /var/lib/docker
+  - name: docker-store
+    volume:
+      size: 16Gi
+commands:
+  - id: rust-install
+    exec:
+      component: aws-runtime
+      commandLine: " curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y"
+
+events:
+  postStart:
+    - rust-install
