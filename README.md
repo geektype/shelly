@@ -7,7 +7,41 @@
 ### Example usage
 
 ```
-$ shelly "give me alist of all unique contributors to this repo and the number of commits they have made"
+$ shelly "give me a list of all unique contributors to this repo and the number of commits they have made"
 
 git shortlog -sne
+```
+
+## Installation
+
+At the moment the only way to use shelly is by building from source. Eventually there will be more options available for installation.
+
+### Build from source
+
+#### Pre-requisites
+To build this project you must have a functioning rust toolchain setup
+
+* `rustc` >= 1.77
+* `cargo` >= 1.77
+
+#### Build
+```shell
+cargo build --release
+```
+
+#### Install
+You simply need to place the compiled binary in a directory that exists on `PATH`. `/usr/local/bin` is normally considered a good place for programs you compile yourself.
+
+```
+cp ./target/release/shelly /usr/local/bin/shelly
+```
+
+Reload your shell and you should be able to run shelly
+
+```
+$ which shelly
+/usr/local/bin/shelly
+
+$ shelly --version
+Shelly AI CLI assistant v0.1.0-alpha
 ```
