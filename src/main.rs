@@ -32,7 +32,10 @@ fn main() {
     let mut api_key = String::from("Bearer ");
     match env::var("SHELLY_OPENAI_KEY") {
         Ok(k) => api_key.push_str(&k),
-        Err(_) => panic!("SHELLY_OPENAI_KEY is not set")
+        Err(_) => {
+            eprintln!("SHELLY_OPENAI_KEY environment variable not set.");
+            process::exit(1)
+        }
     }
 
     let sys_msg = Message {
@@ -46,7 +49,7 @@ fn main() {
         process::exit(1);
     }
 
-    let prompt = String::from(args[1].clone());
+    let prompt = args[1].clone();
 
     let user_msg = Message {
         role: String::from("user"),
