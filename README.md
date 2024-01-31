@@ -45,3 +45,10 @@ $ which shelly
 $ shelly --version
 Shelly AI CLI assistant v0.1.0-alpha
 ```
+
+*Optional:* If you want to use another keyword to invoke shelly instead of `shelly` you can create a symlink
+```
+sudo ln -s /usr/local/bin/shelly /usr/local/bin/ai
+```
+
+You can then invoke shelly using `ai` keyword
