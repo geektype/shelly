@@ -27,7 +27,7 @@ struct Response {
     choices: Vec<Choice>
 }
 
-use reqwest::header::AUTHORIZATION;
+use reqwest::{header::AUTHORIZATION, StatusCode};
 
 use crate::config::ConfigError;
 
@@ -79,8 +79,22 @@ fn main() {
 
     let body = client.post(OPEN_AI_BASE)
                .json(&comp)
-               .header(AUTHORIZATION, cfg.api_key);
-    let resp: Response = body.send().unwrap().json().expect("failed");
-    println!("{}", resp.choices[0].message.content);
-    println!("{}", cfg.prompt);
+               .header(AUTHORIZATION, format!("Bearer {}", cfg.api_key));
+    let resp = body.send().unwrap();
+    match resp.status() {
+        StatusCode::OK => {}
+
+        StatusCode::UNAUTHORIZED => {
+            eprintln!("Invalid API Key provided");
+            std::process::exit(1);
+        }
+        _ => {
+            eprintln!("Unhandled error from API");
+            std::process::exit(1);
+        }
+    } 
+
+    let resp_decoded = resp.json::<Response>().unwrap();
+    
+    println!("{}", resp_decoded.choices[0].message.content);
 }
