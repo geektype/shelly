@@ -14,9 +14,12 @@ jobs:
     - uses: actions/checkout@v4
     # - name: Build
     #   run: cargo build --verbose --release
-    - name: Name
+    - name: Release
       run: |
-        echo $AUTHOR
+        bash scripts/release.sh
       env:
-        AUTHOR: ${{ github.event.release.author.login }}
+        OWNER: ${{ github.event.release.author.login }}
+        RELEASE: ${{ github.event.release.id }}
+        REPO: ${{ github.event.repository.name }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
