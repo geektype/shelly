@@ -2,7 +2,7 @@ name: Build
 
 on:
   release:
-    types: [published, created]
+    types: [published, created, released]
 jobs:
   build_matrix:
     strategy:
