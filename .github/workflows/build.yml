@@ -1,8 +1,8 @@
 name: Build
 
 on:
-  push:
-    branches: [ "main" ]
+  release:
+    types: [released]
 jobs:
   build_matrix:
     strategy:
@@ -11,6 +11,8 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Build
-      run: cargo build --verbose --release
+    # - uses: actions/checkout@v4
+    # - name: Build
+    #   run: cargo build --verbose --release
+    - name: Name
+      run: echo ${{ github.event.release.author.email }}
