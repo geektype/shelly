@@ -5,4 +5,4 @@ curl -L \
     -H "${AUTH}" \
     -H "Content-Type: application/octet-stream" \
     "https://uploads.github.com/repos/${OWNER}/${REPO}/releases/${RELEASE}/assets?name=shelly-${PLATFORM}" \
-    --data-binary "@../target/release/shelly"
+    --data-binary "@./target/release/shelly"
