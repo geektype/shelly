@@ -2,7 +2,7 @@ name: Build
 
 on:
   release:
-    types: [released]
+    types: [published]
 jobs:
   build_matrix:
     strategy:
@@ -11,7 +11,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    # - uses: actions/checkout@v4
+    - uses: actions/checkout@v4
     # - name: Build
     #   run: cargo build --verbose --release
     - name: Name
