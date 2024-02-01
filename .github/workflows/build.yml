@@ -24,4 +24,5 @@ jobs:
         RELEASE: ${{ github.event.release.id }}
         REPO: ${{ github.event.repository.name }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        PLATFORM: ${{ matrix.os }}
       
