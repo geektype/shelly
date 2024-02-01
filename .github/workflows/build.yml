@@ -15,4 +15,8 @@ jobs:
     # - name: Build
     #   run: cargo build --verbose --release
     - name: Name
-      run: echo ${{ github.event.release.author.email }}
+      run: |
+        echo $AUTHOR
+      env:
+        AUTHOR: ${{ github.event.release.author.email }}
+      
