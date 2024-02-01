@@ -13,7 +13,7 @@ impl Config {
         let api_key = std::env::var("SHELLY_OPENAI_KEY").map_err(|_| ConfigError::MissingApiKey)?;
 
         let args: Vec<String> = std::env::args().collect();
-        if args.len() != 2 {
+        if args.len() < 2 {
             return Err(ConfigError::MissingPrompt);
         }
 
