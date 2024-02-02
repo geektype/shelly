@@ -47,7 +47,7 @@ fn main() {
         std::process::exit(0);
     }
     
-    let cfg = match Config::load() {
+    let cfg = match Config::load(std::env::args().collect()) {
         Ok(a) => a,
         Err(ConfigError::MissingApiKey) => {
             eprintln!("API Key not found. Make sure OPEN_AI_KEY is set.");
